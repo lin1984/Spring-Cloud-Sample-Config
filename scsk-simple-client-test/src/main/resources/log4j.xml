@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- [Consol STDOUT] -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss}] - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [Common Appender] -->
+	<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+<!-- 	<appender name="DEFAULT-APPENDER" class="com.scsk.util.scskDailyRollingFileAppender"> -->
+		<param name="File" value="${webapp.root}/resources/logs/common-default.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [Error APPENDER] -->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webapp.root}/resources/logs/common-error.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="threshold" value="error" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- [COMPONENT APPENDER] -->
+	<appender name="COMPONENT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webapp.root}/resources/logs/logistics-component.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>
+	
+<!-- MuLin add start -->
+	<!-- [ACTION APPENDER] -->
+	<appender name="ACTION-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webapp.root}/resources/logs/action.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>
+	<!-- [MANAGER APPENDER] -->
+	<appender name="MANAGER-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webapp.root}/resources/logs/manager.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>	
+	<!-- [BATCH APPENDER] -->
+	<appender name="BATCH-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webapp.root}/resources/logs/batch.log" />
+		<param name="Append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d{yyy/MM/dd HH:mm:ss} %c{2}] - %m%n" />
+		</layout>
+	</appender>		
+<!-- MuLin add end -->
+
+	<category name="org.springframework">
+		<priority value="info" />
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+		<appender-ref ref="CONSOLE" />
+	</category>
+	<category name="org.apache">
+    	<priority value="info" />
+    	<appender-ref ref="DEFAULT-APPENDER" />
+    	<appender-ref ref="ERROR-APPENDER" />
+    	<appender-ref ref="CONSOLE" />
+  </category>
+
+	<!-- [LOGISTICS-COMPONENT] -->
+	<logger name="COMPONENT">
+		<level value="info" />
+		<appender-ref ref="DEFAULT-APPENDER" />
+		<appender-ref ref="ERROR-APPENDER" />
+		<appender-ref ref="COMPONENT-APPENDER" />
+	</logger>
+	
+<!-- MuLin add start  -->
+	<logger name="ACTION_LOG">
+		<level value="info" />
+		<appender-ref ref="ACTION-APPENDER" />
+	</logger>
+	<logger name="MANAGER_LOG">
+		<level value="info" />
+		<appender-ref ref="MANAGER-APPENDER" />
+	</logger>	
+	<logger name="BATCH_LOG">
+		<level value="info" />
+		<appender-ref ref="BATCH-APPENDER" />
+	</logger>	
+ <!-- MuLin add end -->
+		
+	<!-- Root Logger -->
+	<root>
+		<level value="debug" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>
